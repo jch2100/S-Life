@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>삼성생명 설계매니저 AI 실전 워크북</title>
+  <style>
+    @page { size: A4; margin: 0; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #e9e9e9;
+      color: #171717;
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      line-height: 1.5;
+      word-break: keep-all;
+    }
+    .page {
+      width: 210mm;
+      height: 297mm;
+      margin: 12px auto;
+      padding: 18mm 17mm 14mm;
+      background: #fff;
+      position: relative;
+      page-break-after: always;
+      overflow: hidden;
+    }
+    .cover {
+      background: linear-gradient(180deg, #ffffff 0%, #f0f4f9 100%);
+      padding-top: 30mm;
+    }
+    .kicker {
+      color: #1c4e89;
+      font-size: 12pt;
+      font-weight: 700;
+      letter-spacing: 0;
+      margin-bottom: 8mm;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0 0 5mm;
+      font-family: Batang, "Times New Roman", serif;
+      font-size: 22pt;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 3.5mm;
+      font-size: 13.5pt;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 3mm; font-size: 11pt; }
+    ul, ol { margin: 0 0 3mm 5mm; padding-left: 4mm; }
+    li { margin-bottom: 1.4mm; font-size: 10.5pt; }
+    .lead {
+      border-top: 1.4px solid #222;
+      border-bottom: 1.4px solid #222;
+      padding: 3mm 0;
+      margin-bottom: 4mm;
+      font-weight: 700;
+      font-size: 12pt;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5mm;
+    }
+    .box, .check, .stuck, .write {
+      border: 1px solid #d7d7d7;
+      border-radius: 5px;
+      padding: 3mm;
+      margin-bottom: 3mm;
+      background: #fbfbf8;
+    }
+    .check { background: #eff5fb; border-color: #bcd2e8; }
+    .stuck { background: #fff8ed; border-color: #e0c58e; }
+    .write { background: #fff; }
+    .label {
+      display: inline-block;
+      padding: 1.2mm 2.4mm;
+      margin-bottom: 2.4mm;
+      border-radius: 999px;
+      background: #1c4e89;
+      color: #fff;
+      font-size: 9.2pt;
+      font-weight: 700;
+    }
+    .prompt {
+      white-space: pre-wrap;
+      margin: 0 0 4mm;
+      padding: 3mm;
+      border-left: 5px solid #1c4e89;
+      background: #f5efe3;
+      color: #111;
+      font-family: "Malgun Gothic", sans-serif;
+      font-size: 10.2pt;
+      line-height: 1.38;
+    }
+    .steps {
+      margin: 0 0 4mm;
+      padding: 0;
+      list-style: none;
+      counter-reset: step;
+    }
+    .steps li {
+      counter-increment: step;
+      position: relative;
+      min-height: 7mm;
+      padding-left: 11mm;
+      margin-bottom: 2mm;
+    }
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 7mm;
+      height: 7mm;
+      border-radius: 50%;
+      background: #1c4e89;
+      color: #fff;
+      text-align: center;
+      line-height: 7mm;
+      font-weight: 700;
+      font-size: 9pt;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 4mm;
+      font-size: 9.6pt;
+    }
+    th, td {
+      border: 1px solid #cfcfcf;
+      padding: 2mm;
+      vertical-align: top;
+    }
+    th { background: #ebf1f8; }
+    .line {
+      height: 9mm;
+      border-bottom: 1px solid #bdbdbd;
+      margin-bottom: 2mm;
+    }
+    .footer {
+      position: absolute;
+      left: 17mm;
+      right: 17mm;
+      bottom: 8mm;
+      display: flex;
+      justify-content: space-between;
+      color: #777;
+      font-size: 8.8pt;
+      border-top: 1px solid #ddd;
+      padding-top: 2.5mm;
+    }
+    .small { font-size: 9.4pt; color: #333; }
+    @media print {
+      body { background: #fff; }
+      .page { margin: 0; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- 1. Cover -->
+  <section class="page cover">
+    <div class="kicker">삼성생명 설계매니저 AI 실전 워크북</div>
+    <h1>내 폰으로 만드는<br>GA 지원 결과물 3가지</h1>
+    <p class="lead">오늘의 목표는 AI를 이해하는 것이 아닙니다.<br>안내 카드, 설명 슬라이드, 약관 챗봇을<br>내 휴대폰에서 직접 만들어 가져가는 것입니다.</p>
+    <div class="box">
+      <h2>이 교재를 쓰는 방법</h2>
+      <ol>
+        <li>한 번에 한 쪽만 봅니다.</li>
+        <li>휴대폰에서 같은 버튼을 찾습니다.</li>
+        <li>버튼 이름이 다르면 비슷한 이름을 찾습니다.</li>
+        <li>회색 박스의 문장을 그대로 입력합니다.</li>
+        <li>막히면 "막히면 이렇게"를 먼저 봅니다.</li>
+      </ol>
+    </div>
+    <div class="check">
+      <h2>수업에서 못 끝내도 괜찮습니다</h2>
+      <p>이 교재는 버튼 위치까지 적혀 있습니다.<br>오늘 다 못 만든 것은 교재만 보고 혼자서도 완성할 수 있습니다.</p>
+    </div>
+    <div class="footer"><span>삼성생명 설계매니저 AI 실전 워크북</span><span>1/14</span></div>
+  </section>
+
+  <!-- 2. Preparation -->
+  <section class="page">
+    <div class="kicker">Before Start</div>
+    <h1>시작 전 준비</h1>
+    <p class="lead">준비물을 확인하고,<br>절대 넣지 말아야 할 정보를 먼저 약속합니다.</p>
+    <div class="grid-2">
+      <div class="check">
+        <span class="label">준비물</span>
+        <ul>
+          <li>충전된 휴대폰</li>
+          <li>ChatGPT 앱 로그인</li>
+          <li>구글 계정 로그인 (NotebookLM · Gemini용)</li>
+          <li>크롬 브라우저</li>
+          <li>미리 받은 실습 자료 2개<br>(상품 자료 · 약관 PDF)</li>
+          <li>볼펜</li>
+        </ul>
+      </div>
+      <div class="stuck">
+        <span class="label">넣지 말 것</span>
+        <ul>
+          <li>고객 성명 · 연락처</li>
+          <li>주민번호 · 계좌번호 · 카드번호</li>
+          <li>계약번호 · 청약 · 보험금 청구 내용</li>
+          <li>고객의 건강 · 병력 정보</li>
+          <li>회사 내부 문서 원문</li>
+        </ul>
+      </div>
+    </div>
+    <div class="box">
+      <h2>오늘의 약속</h2>
+      <p>실습은 전부 <strong>미리 받은 공개 자료</strong>로만 합니다.<br>고객 정보와 계약 정보는 오늘도, 앞으로도 넣지 않습니다.</p>
+    </div>
+    <div class="write">
+      <h2>오늘 카드로 만들고 싶은 안내 주제 1개</h2>
+      <div class="line"></div>
+      <h2>담당 GA에서 가장 자주 받는 질문 1개</h2>
+      <div class="line"></div>
+    </div>
+    <div class="footer"><span>시작 전 준비</span><span>2/14</span></div>
+  </section>
+
+  <!-- 3. Why -->
+  <section class="page">
+    <div class="kicker">Why AI</div>
+    <h1>왜 설계매니저에게 AI인가</h1>
+    <p class="lead">설계매니저의 하루는 담당 GA의<br>영업 · 교육 · 자료 지원으로 채워집니다.<br>오늘은 그 세 가지를 AI로 직접 만듭니다.</p>
+    <table>
+      <tr><th>자주 하는 일</th><th>지금까지는</th><th>오늘 만들 결과물</th></tr>
+      <tr><td>이벤트 · 신상품<br>안내 전달</td><td>문자로 글만 보내거나,<br>디자인은 포기</td><td><strong>모듈 ①</strong><br>카톡용 안내 카드 이미지<br>(ChatGPT)</td></tr>
+      <tr><td>상품 교육 ·<br>브리핑 준비</td><td>자료를 읽고<br>말로 풀어서 설명</td><td><strong>모듈 ②</strong><br>상품 설명 슬라이드<br>(NotebookLM)</td></tr>
+      <tr><td>약관 · 보장범위<br>질문 응대</td><td>약관을 뒤지거나<br>본사에 문의</td><td><strong>모듈 ③</strong><br>약관 Q&amp;A 챗봇<br>(Gemini)</td></tr>
+    </table>
+    <div class="check">
+      <h2>오늘의 핵심</h2>
+      <p>세 가지 모두 <strong>내 휴대폰에서, 오늘 안에</strong> 만듭니다.<br>만든 결과물은 내일 담당 GA에 바로 보낼 수 있습니다.</p>
+    </div>
+    <div class="footer"><span>왜 설계매니저에게 AI인가</span><span>3/14</span></div>
+  </section>
+
+  <!-- 4. App map -->
+  <section class="page">
+    <div class="kicker">Tool Map</div>
+    <h1>오늘 쓰는 도구 3개 지도</h1>
+    <p class="lead">도구는 세 개, 여는 방법은 두 가지입니다.<br>ChatGPT와 NotebookLM은 앱으로,<br>Gemini 챗봇 만들기는 크롬 브라우저로 엽니다.</p>
+    <table>
+      <tr><th>도구</th><th>어디서 여나</th><th>오늘 만들 것</th></tr>
+      <tr><td><strong>ChatGPT</strong></td><td>ChatGPT 앱</td><td>카톡 · 문자용<br>안내 카드 이미지</td></tr>
+      <tr><td><strong>NotebookLM</strong></td><td>NotebookLM 앱</td><td>상품 설명 슬라이드<br>(영상 개요)</td></tr>
+      <tr><td><strong>Gemini</strong></td><td>크롬 브라우저에서<br>gemini.google.com 접속<br><span class="small">(앱에는 챗봇 만들기 버튼이 없음)</span></td><td>약관 Q&amp;A 챗봇<br>(Gem)</td></tr>
+    </table>
+    <div class="check">
+      <h2>지금 확인</h2>
+      <ul>
+        <li>ChatGPT 앱이 로그인되어 있다.</li>
+        <li>NotebookLM 앱이 설치되어 있다. (없으면 앱스토어 · 플레이스토어에서 설치)</li>
+        <li>크롬에서 구글 계정이 로그인되어 있다.</li>
+      </ul>
+    </div>
+    <div class="stuck">
+      <h2>무료 계정 안내</h2>
+      <p>오늘은 전부 무료 계정 기준으로 진행합니다.<br>ChatGPT 무료 계정은 이미지 생성이 하루 2~3장 수준이므로,<br>프롬프트를 그대로 입력해 한 번에 성공하는 것이 좋습니다.</p>
+    </div>
+    <div class="footer"><span>도구 3개 지도</span><span>4/14</span></div>
+  </section>
+
+  <!-- 5. Module 1 - find button -->
+  <section class="page">
+    <div class="kicker">Module 1 · ChatGPT</div>
+    <h1>이미지 만들기 버튼 찾기</h1>
+    <p class="lead">첫 결과물은 카톡으로 보낼 안내 카드입니다.<br>먼저 ChatGPT에서 이미지 만들기 버튼을 찾습니다.</p>
+    <span class="label">휴대폰에서 누를 것</span>
+    <ol class="steps">
+      <li>ChatGPT 앱을 엽니다.</li>
+      <li>새 대화를 엽니다.</li>
+      <li>입력창 옆의 <strong>+</strong>를 누릅니다.</li>
+      <li>도구, More, Images 중 비슷한 이름을 찾습니다.</li>
+      <li><strong>이미지 만들기</strong> 또는 <strong>Images</strong>를 누릅니다.</li>
+    </ol>
+    <div class="check">
+      <h2>잘 되었는지 확인</h2>
+      <p>입력창에 이미지 관련 표시가 생기거나,<br>ChatGPT가 이미지를 만들 준비가 되었다고 안내하면 성공입니다.</p>
+    </div>
+    <div class="stuck">
+      <h2>막히면 이렇게</h2>
+      <p>메뉴가 안 보이면 그냥 입력창에 <strong>"이미지를 만들어줘"</strong>라고 입력합니다.<br>그래도 안 되면 앱스토어에서 ChatGPT 앱을 업데이트합니다.</p>
+    </div>
+    <div class="footer"><span>모듈 ① 이미지 버튼 찾기</span><span>5/14</span></div>
+  </section>
+
+  <!-- 6. Module 1 - make card -->
+  <section class="page">
+    <div class="kicker">Module 1 · ChatGPT</div>
+    <h1>안내 카드 만들기</h1>
+    <p class="lead">카드에 들어갈 글자를 내가 정해서 알려주는 것이<br>오탈자 없는 카드를 만드는 핵심입니다.</p>
+    <span class="label">짧은 버전</span>
+    <pre class="prompt">설계사분들께 카카오톡으로 보낼
+세로형 안내 카드 이미지를 만들어주세요.
+
+카드에 넣을 글자는 아래만 사용하세요.
+제목: 7월 신상품 설명회
+일시: 7월 24일(금) 오전 10시
+대상: 우리 지점 설계사님
+한 줄 안내: 신상품 핵심을 30분에 정리해드립니다.
+
+글자는 위 문구를 그대로, 오타 없이 넣어주세요.</pre>
+    <span class="label">상세 버전</span>
+    <pre class="prompt">위 내용으로 다시 만들어주세요.
+깔끔한 금융 스타일, 신뢰감 있는 파란색 계열,
+배경은 단순하게, 제목이 가장 크게 보이게 해주세요.
+장식용 글자는 넣지 마세요.</pre>
+    <div class="check">
+      <h2>잘 되었는지 확인</h2>
+      <p>카드 속 글자를 한 글자씩 확인합니다.<br>한글이 틀렸으면 <strong>"글자만 정확히 고쳐주세요"</strong>라고 다시 요청합니다.</p>
+    </div>
+    <div class="stuck">
+      <h2>막히면 이렇게</h2>
+      <p>제목 · 일시 · 대상은 2쪽에 적은 내 주제로 바꿔도 됩니다.<br>단, 문구는 짧을수록 오타가 적습니다.</p>
+    </div>
+    <div class="footer"><span>모듈 ① 안내 카드 만들기</span><span>6/14</span></div>
+  </section>
+
+  <!-- 7. Module 1 - edit, save, send -->
+  <section class="page">
+    <div class="kicker">Module 1 · ChatGPT</div>
+    <h1>카드 수정하고 카톡으로 보내기</h1>
+    <p class="lead">첫 결과는 초안입니다.<br>한 번에 한 가지만 고치고, 저장해서 보냅니다.</p>
+    <span class="label">휴대폰에서 누를 것</span>
+    <ol class="steps">
+      <li>생성된 이미지를 누릅니다.</li>
+      <li>아래 수정 문장을 입력합니다. (수정이 필요할 때만)</li>
+      <li>결과가 마음에 들면 이미지를 다시 누릅니다.</li>
+      <li>저장 · Save · 다운로드 중 비슷한 버튼을 누릅니다.</li>
+      <li>카카오톡을 열어 사진으로 첨부해 보냅니다.</li>
+    </ol>
+    <pre class="prompt">전체 분위기는 좋습니다.
+제목 글자를 더 크게,
+배경은 더 단순하게 바꿔주세요.
+글자 내용은 바꾸지 마세요.</pre>
+    <div class="stuck">
+      <h2>막히면 이렇게</h2>
+      <p>무료 계정은 이미지 횟수가 하루 2~3장 수준입니다.<br>수정 요청은 1번만 하고, 옆자리와 결과를 비교해봅니다.</p>
+    </div>
+    <div class="grid-2">
+      <div class="write"><h2>이 카드를 보낼 곳</h2><div class="line"></div></div>
+      <div class="write"><h2>다음에 만들 카드 주제</h2><div class="line"></div></div>
+    </div>
+    <div class="footer"><span>모듈 ① 저장과 전송</span><span>7/14</span></div>
+  </section>
+
+  <!-- 8. Module 2 - open & upload -->
+  <section class="page">
+    <div class="kicker">Module 2 · NotebookLM</div>
+    <h1>NotebookLM 열고 자료 넣기</h1>
+    <p class="lead">NotebookLM은 내가 올린 자료 안에서만 답하는 도구입니다.<br>먼저 상품 자료 PDF를 넣습니다.</p>
+    <span class="label">휴대폰에서 누를 것</span>
+    <ol class="steps">
+      <li>카카오톡에서 받은 <strong>상품 자료 PDF</strong>를 열고, 공유 · 저장 버튼으로 휴대폰에 저장합니다.</li>
+      <li>NotebookLM 앱을 엽니다.</li>
+      <li><strong>새로 만들기</strong> 또는 <strong>+</strong>를 누릅니다.</li>
+      <li>소스 추가 화면에서 <strong>PDF</strong> 또는 <strong>파일</strong>을 누릅니다.</li>
+      <li>방금 저장한 상품 자료 PDF를 선택합니다.</li>
+    </ol>
+    <div class="check">
+      <h2>잘 되었는지 확인</h2>
+      <p>소스 목록에 파일 이름이 보이고,<br>요약이나 질문 제안이 나타나면 성공입니다.</p>
+    </div>
+    <div class="stuck">
+      <h2>막히면 이렇게</h2>
+      <p>파일이 안 보이면 1번(휴대폰에 저장)을 건너뛴 경우입니다.<br>카카오톡으로 돌아가 파일을 먼저 저장하고 다시 시도합니다.</p>
+    </div>
+    <div class="footer"><span>모듈 ② 자료 넣기</span><span>8/14</span></div>
+  </section>
+
+  <!-- 9. Module 2 - make slides -->
+  <section class="page">
+    <div class="kicker">Module 2 · NotebookLM</div>
+    <h1>상품 설명 슬라이드 만들기</h1>
+    <p class="lead">GA 교육 · 브리핑에 쓸 슬라이드를<br>버튼 하나로 초안까지 만듭니다.</p>
+    <span class="label">휴대폰에서 누를 것</span>
+    <ol class="steps">
+      <li>화면 아래 또는 상단에서 <strong>스튜디오</strong> 메뉴를 찾습니다.</li>
+      <li><strong>슬라이드</strong> 또는 <strong>영상 개요</strong>를 찾습니다.</li>
+      <li>항목 옆의 <strong>&gt;</strong> 또는 연필 모양을 눌러 지침 입력 화면을 엽니다.</li>
+      <li>아래 지침을 붙여넣고 <strong>생성</strong>을 누릅니다.</li>
+    </ol>
+    <span class="label">지침 (붙여넣기)</span>
+    <pre class="prompt">보험 설계사에게 이 상품을 설명하는 슬라이드를 만들어주세요.
+상품의 핵심 보장 3가지를 중심으로, 쉬운 말로 정리해주세요.
+
+디자인은 아래 스타일로 만들어주세요.
+Minimalist infographic, simple flat vector art,
+clean data visualization, corporate color palette,
+white background, highly legible</pre>
+    <div class="stuck">
+      <h2>막히면 이렇게</h2>
+      <p>생성에는 몇 분이 걸립니다. <strong>기다리지 말고 11쪽 모듈 ③을 먼저 진행합니다.</strong><br>지침 입력 화면을 못 찾으면 지침 없이 그냥 생성해도 됩니다.</p>
+    </div>
+    <div class="footer"><span>모듈 ② 슬라이드 만들기</span><span>9/14</span></div>
+  </section>
+
+  <!-- 10. Module 2 - review & share -->
+  <section class="page">
+    <div class="kicker">Module 2 · NotebookLM</div>
+    <h1>슬라이드 확인하고 공유하기</h1>
+    <p class="lead">AI가 만든 요약은 반드시 원자료와 대조합니다.<br>확인이 끝나면 링크로 공유합니다.</p>
+    <span class="label">휴대폰에서 누를 것</span>
+    <ol class="steps">
+      <li>완성 알림이 오면 슬라이드(영상)를 엽니다.</li>
+      <li>한 장씩 넘기며 내용을 봅니다.</li>
+      <li><strong>상품명과 숫자</strong>를 원자료와 대조합니다.</li>
+      <li>공유 버튼을 눌러 <strong>링크 복사</strong>를 찾습니다.</li>
+      <li>복사한 링크를 나에게 카톡으로 보내봅니다.</li>
+    </ol>
+    <div class="check">
+      <h2>잘 되었는지 확인</h2>
+      <ul>
+        <li>슬라이드가 재생되고, 상품 핵심이 담겨 있다.</li>
+        <li>보장금액 · 보험기간 같은 숫자가 원자료와 같다.</li>
+        <li>링크가 카톡으로 전송된다.</li>
+      </ul>
+    </div>
+    <div class="stuck">
+      <h2>막히면 이렇게</h2>
+      <p>숫자가 틀렸으면 그 슬라이드는 쓰지 않습니다.<br>생성이 너무 오래 걸리면 <strong>오디오 개요</strong>를 먼저 만들어 들어봅니다.<br>슬라이드는 강의 후 완성해도 충분합니다.</p>
+    </div>
+    <div class="write"><h2>이 슬라이드를 쓸 자리 (GA 교육 · 조회 · 브리핑)</h2><div class="line"></div></div>
+    <div class="footer"><span>모듈 ② 확인과 공유</span><span>10/14</span></div>
+  </section>
+
+  <!-- 11. Module 3 - open gems in chrome -->
+  <section class="page">
+    <div class="kicker">Module 3 · Gemini</div>
+    <h1>크롬에서 챗봇 틀 만들기</h1>
+    <p class="lead">약관 챗봇은 Gemini의 Gem 기능으로 만듭니다.<br>중요: Gemini <strong>앱이 아니라 크롬 브라우저</strong>에서 만듭니다.</p>
+    <div class="box">
+      <h2>왜 크롬인가</h2>
+      <p>Gemini 앱에는 아직 챗봇(Gem) 만들기 버튼이 없습니다.<br>크롬으로 gemini.google.com에 들어가면 만들 수 있습니다. (2026년 7월 기준)</p>
+    </div>
+    <span class="label">휴대폰에서 누를 것</span>
+    <ol class="steps">
+      <li><strong>크롬</strong> 앱을 엽니다.</li>
+      <li>주소창에 <strong>gemini.google.com</strong>을 입력합니다.</li>
+      <li>구글 계정으로 로그인되어 있는지 확인합니다.</li>
+      <li>왼쪽 위 <strong>메뉴(≡)</strong>를 누릅니다.</li>
+      <li><strong>Gem</strong>, <strong>Gem 관리자</strong>, <strong>Explore Gems</strong> 중 비슷한 이름을 누릅니다.</li>
+      <li><strong>Gem 만들기</strong> 또는 <strong>+ 새 Gem</strong>을 누릅니다.</li>
+    </ol>
+    <div class="stuck">
+      <h2>막히면 이렇게</h2>
+      <p>주소를 눌렀는데 Gemini 앱이 열리면,<br>크롬 주소창에 직접 입력해서 다시 들어갑니다.<br>메뉴에서 Gem이 안 보이면 화면을 아래로 내려 찾아봅니다.</p>
+    </div>
+    <div class="footer"><span>모듈 ③ 챗봇 틀 만들기</span><span>11/14</span></div>
+  </section>
+
+  <!-- 12. Module 3 - instructions & knowledge -->
+  <section class="page">
+    <div class="kicker">Module 3 · Gemini</div>
+    <h1>약관을 학습시키는 지침</h1>
+    <p class="lead">챗봇의 실력은 지침이 결정합니다.<br>약관 안에서만 답하게 만드는 것이 핵심입니다.</p>
+    <span class="label">휴대폰에서 누를 것</span>
+    <ol class="steps">
+      <li>이름 칸에 <strong>"상품 약관 도우미"</strong>라고 입력합니다.</li>
+      <li>지침 칸에 아래 문장을 붙여넣습니다.</li>
+      <li>지식 · 파일 추가에서 미리 받은 <strong>약관 PDF</strong>를 올립니다.</li>
+      <li><strong>저장</strong>을 누릅니다.</li>
+    </ol>
+    <span class="label">지침 (붙여넣기)</span>
+    <pre class="prompt">당신은 보험 상품 약관 안내 도우미입니다.
+
+답변 규칙:
+1. 업로드된 약관 문서에서만 근거를 찾아 답합니다.
+2. 답변 끝에 근거가 된 조항 번호를 표시합니다.
+3. 약관에서 확인되지 않는 내용은
+   "약관에서 확인되지 않습니다"라고만 답합니다.
+4. 어려운 용어는 쉬운 말로 풀어 설명합니다.
+5. 모든 답변 마지막에 이렇게 붙입니다.
+   "정확한 내용은 약관 원문과 회사 공식 안내를 확인하세요."</pre>
+    <div class="stuck">
+      <h2>막히면 이렇게</h2>
+      <p>파일 업로드 버튼이 안 보이면 지침만 저장하고,<br>대화 시작 후 클립 모양 버튼으로 약관 PDF를 첨부해도 됩니다.</p>
+    </div>
+    <div class="footer"><span>모듈 ③ 지침과 약관 학습</span><span>12/14</span></div>
+  </section>
+
+  <!-- 13. Module 3 - test -->
+  <section class="page">
+    <div class="kicker">Module 3 · Gemini</div>
+    <h1>현장 질문으로 테스트</h1>
+    <p class="lead">챗봇은 만들고 끝이 아니라, 시험해보고 씁니다.<br>일부러 함정 질문도 하나 던져봅니다.</p>
+    <span class="label">테스트 질문 1</span>
+    <pre class="prompt">이 상품에서 보험금이 지급되지 않는 경우를
+쉬운 말로 정리해주세요.
+근거 조항도 함께 알려주세요.</pre>
+    <span class="label">테스트 질문 2 (함정)</span>
+    <pre class="prompt">이 약관에 없을 것 같은 내용을 하나 물어봅니다.
+예: 자동차 수리비도 보장되나요?</pre>
+    <div class="check">
+      <h2>잘 되었는지 확인</h2>
+      <ul>
+        <li>답변에 조항 번호가 붙어 나온다.</li>
+        <li>약관에 없는 질문에는 "확인되지 않습니다"라고 답한다.</li>
+        <li>답변 끝에 공식 안내 확인 문구가 붙는다.</li>
+      </ul>
+    </div>
+    <div class="stuck">
+      <h2>막히면 이렇게</h2>
+      <p>함정 질문에 그럴듯한 답을 지어내면, 지침 3번이 빠진 것입니다.<br>Gem 수정 화면에서 지침을 다시 확인합니다.</p>
+    </div>
+    <div class="write">
+      <h2>담당 GA에서 받았던 질문 2개를 챗봇에 물어보고 기록</h2>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+    <div class="footer"><span>모듈 ③ 챗봇 테스트</span><span>13/14</span></div>
+  </section>
+
+  <!-- 14. Checklist & homework -->
+  <section class="page">
+    <div class="kicker">Check &amp; Homework</div>
+    <h1>마지막 체크리스트</h1>
+    <p class="lead">아래 항목 중 6개 이상 표시할 수 있으면<br>오늘 목표는 충분히 달성했습니다.</p>
+    <table>
+      <tr><th>확인</th><th>할 수 있는 일</th></tr>
+      <tr><td>□</td><td>ChatGPT 앱에서 이미지 만들기를 찾을 수 있다.</td></tr>
+      <tr><td>□</td><td>카드에 넣을 글자를 정해서 안내 카드를 만들 수 있다.</td></tr>
+      <tr><td>□</td><td>만든 카드를 저장하고 카톡으로 보낼 수 있다.</td></tr>
+      <tr><td>□</td><td>NotebookLM에 자료 PDF를 올릴 수 있다.</td></tr>
+      <tr><td>□</td><td>스튜디오에서 슬라이드(영상 개요)를 만들 수 있다.</td></tr>
+      <tr><td>□</td><td>만든 슬라이드를 링크로 공유할 수 있다.</td></tr>
+      <tr><td>□</td><td>크롬으로 gemini.google.com에 들어갈 수 있다.</td></tr>
+      <tr><td>□</td><td>약관 PDF로 나만의 챗봇(Gem)을 만들 수 있다.</td></tr>
+      <tr><td>□</td><td>고객 정보 · 계약 정보를 넣기 전에 멈출 수 있다.</td></tr>
+    </table>
+    <span class="label">이번 주 과제</span>
+    <pre class="prompt">나는 보험대리점(GA)을 지원하는 설계매니저입니다.
+오늘 안내 카드, 설명 슬라이드, 약관 챗봇 만들기를 배웠습니다.
+이번 주 담당 GA 지원 업무에 바로 써볼 수 있는
+10분짜리 작은 실험 3개를 추천해주세요.
+하나는 안내 카드, 하나는 슬라이드나 챗봇을 활용해주세요.</pre>
+    <div class="write"><h2>내가 선택한 작은 실험 1개</h2><div class="line"></div></div>
+    <div class="footer"><span>체크리스트와 과제</span><span>14/14</span></div>
+  </section>
+</body>
+</html>
