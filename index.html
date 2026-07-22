@@ -188,6 +188,39 @@
   .print-link{display:inline-flex;gap:6px;align-items:center;margin-top:10px;
     font-size:13px;font-weight:800;color:var(--blue);text-decoration:none;
     border:1px solid var(--blue-line);border-radius:10px;padding:8px 13px;background:var(--blue-soft);}
+
+  /* ---- Prompt library (부록) ---- */
+  .lib-tabs{display:flex;gap:6px;background:#eef0f5;border:1px solid #e2e5ee;
+    border-radius:12px;padding:4px;margin:0 2px 12px;}
+  .lib-tab{flex:1;border:0;background:transparent;border-radius:9px;padding:11px 8px;
+    font-family:inherit;font-size:13.5px;font-weight:800;color:var(--muted);cursor:pointer;
+    display:flex;align-items:center;justify-content:center;gap:7px;transition:background .15s ease,color .15s ease;}
+  .lib-tab:active{transform:scale(.98);}
+  .lib-tab.active{background:#fff;color:var(--blue);box-shadow:0 1px 3px rgba(20,24,40,.12);}
+  .lib-tab em{font-style:normal;font-size:11px;font-weight:800;color:var(--muted);
+    background:rgba(20,40,160,.08);border-radius:99px;padding:2px 8px;font-variant-numeric:tabular-nums;}
+  .lib-tab.active em{color:var(--blue);background:var(--blue-soft);}
+  .lib-search{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #e2e5ee;
+    border-radius:12px;padding:0 12px;margin:0 2px 12px;height:46px;}
+  .lib-search > .ic{font-size:18px;color:var(--muted);line-height:1;}
+  .lib-search input{flex:1;min-width:0;border:0;outline:0;background:transparent;
+    font-family:inherit;font-size:14.5px;color:var(--ink);}
+  .lib-search button{border:0;background:none;color:var(--muted);font-size:22px;
+    cursor:pointer;line-height:1;padding:0 2px;}
+  .lib-count{font-size:12.5px;font-weight:700;color:var(--muted);margin:2px 4px 12px;
+    font-variant-numeric:tabular-nums;}
+  .lib-card{background:var(--paper);border:1px solid #e9ebf1;border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:16px;margin-bottom:12px;}
+  .lib-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+  .lib-card-top h3{margin:0;font-size:15.5px;font-weight:800;letter-spacing:-.01em;line-height:1.42;}
+  .lib-card-top p{margin:5px 0 0;font-size:12.5px;color:var(--muted);line-height:1.5;}
+  .lib-copy{flex:0 0 auto;}
+  .lib-prompt{margin-top:12px;background:var(--warm);border:1px solid var(--warm-line);
+    border-left:5px solid var(--blue);border-radius:12px;}
+  .lib-prompt pre{margin:0;padding:12px 14px;white-space:pre-wrap;overflow-wrap:anywhere;
+    word-break:break-word;font-family:inherit;font-size:13px;line-height:1.62;color:#20242c;}
+  .lib-empty{padding:48px 20px;text-align:center;color:var(--muted);font-size:14px;line-height:1.7;}
+  .lib-empty b{color:var(--ink);}
 </style>
 </head>
 <body>
@@ -594,6 +627,30 @@ white background, highly legible</pre>
     </div>
   </section>
 
+  <hr class="div">
+
+  <!-- Prompt Library (부록) -->
+  <section id="library">
+    <div class="sec-head"><span class="no">부록</span><h2>프롬프트 라이브러리</h2></div>
+    <p class="lead">모듈 ①·②에서 바로 꺼내 쓰는 프롬프트 모음이에요. 원하는 카드의 <b>복사</b>를 눌러 그대로 붙여넣으세요.</p>
+
+    <div class="lib-tabs" role="tablist" aria-label="프롬프트 종류">
+      <button type="button" role="tab" aria-selected="true" class="lib-tab active" data-tab="nano">인물 이미지 변환 <em id="nano-count"></em></button>
+      <button type="button" role="tab" aria-selected="false" class="lib-tab" data-tab="notebook">슬라이드 스타일 <em id="notebook-count"></em></button>
+    </div>
+
+    <label class="lib-search">
+      <span class="ic" aria-hidden="true">⌕</span>
+      <input id="lib-input" placeholder="스타일·용도로 검색" aria-label="프롬프트 검색">
+      <button id="lib-clear" type="button" aria-label="검색어 지우기" hidden>×</button>
+    </label>
+
+    <div class="note info" id="lib-tip"></div>
+    <div class="lib-count" id="lib-count"></div>
+    <div id="lib-grid"></div>
+    <div class="lib-empty" id="lib-empty" hidden><b>검색 결과가 없어요.</b><br>다른 단어로 검색해보세요.</div>
+  </section>
+
   <footer>
     <div><b>Money&amp;Works · 정찬훈 대표강사</b></div>
     생성형 AI · 스마트워크 · 영업 · 재무설계<br>
@@ -616,6 +673,7 @@ white background, highly legible</pre>
     <a href="#m2"><span>모듈 ② NotebookLM 슬라이드</span><span class="n">②</span></a>
     <a href="#m3"><span>모듈 ③ Gemini 약관 챗봇</span><span class="n">③</span></a>
     <a href="#check"><span>마지막 체크리스트·과제</span><span class="n">완성</span></a>
+    <a href="#library"><span>프롬프트 라이브러리</span><span class="n">부록</span></a>
   </div>
 </div>
 
@@ -677,6 +735,76 @@ white background, highly legible</pre>
   sheet.addEventListener('click',function(e){
     if(e.target.hasAttribute('data-close')||e.target.closest('a')){sheet.classList.remove('open');}
   });
+
+  // ---- prompt library (부록) ----
+  var DATA={"nano":[{"title":"01. 시네마틱 스튜디오 포트레이트","use":"프로필 화보 · 강사 소개 · 브랜딩","prompt":"Transform the uploaded person into an elegant cinematic studio portrait with professional fashion photography lighting. Keep the same person's identity, facial structure, perceived adult age, gender presentation, skin tone, hairstyle, and natural body proportions. Dress the subject in a sophisticated modern outfit with refined styling. Use dramatic yet flattering key light, soft fill light, subtle rim light, rich tonal contrast, and a slight warmth. Maintain realistic skin texture and a polished editorial finish. Clean studio background, confident and composed expression, premium fashion magazine aesthetic. Photorealistic, high resolution. --ar 1:1"},{"title":"02. 자연광 뷰티 포트레이트","use":"편안한 프로필 · SNS · 인터뷰","prompt":"Transform the uploaded person into a fresh natural-light beauty portrait. Keep the same person's identity, facial structure, perceived adult age, gender presentation, skin tone, hairstyle, and natural proportions. Use soft window light, gentle shadows, clean styling, fresh makeup with natural skin visible, and a soft genuine expression. Shot with an 85mm lens at f/2.0, with a bright and airy feel and a predominantly white or light background. Maintain realistic skin texture without excessive retouching. Fresh, clean, warm, and approachable aesthetic. --ar 1:1"},{"title":"03. 모던 미니멀 포트레이트","use":"웹사이트 · 소개 카드 · 전문 프로필","prompt":"Transform the uploaded person into a modern portrait with clean contemporary aesthetics. Keep the same person's identity, facial structure, perceived adult age, gender presentation, skin tone, hairstyle, and natural proportions. Place the subject against a plain solid-color background such as white, gray, or one bold color. Use simple elegant styling, minimal accessories, balanced negative space, and a clean composition following the rule of thirds. Soft directional studio lighting, calm confident expression, realistic skin texture, premium editorial quality. --ar 1:1"},{"title":"04. 미국식 비즈니스 헤드샷","use":"LinkedIn · 회사 소개 · 제안서 · 명함","prompt":"Transform the uploaded person into a polished American-style business headshot. Keep the same person's identity, facial structure, perceived adult age, gender presentation, skin tone, hairstyle, and natural proportions. Dress the subject in a contemporary professional outfit appropriate to their gender presentation. Use a neutral gray or softly blurred office background, even flattering studio lighting, direct eye contact, upright posture, and a warm confident expression. Create a polished modern professional look with realistic skin tones and natural texture. Photorealistic 4K quality suitable for LinkedIn, a corporate website, proposal, or business card. --ar 1:1"},{"title":"05. 시네마틱 창가 에디토리얼","use":"패션 화보 · 감성 프로필 · 브랜드 콘텐츠","prompt":"Transform the uploaded person into a sophisticated cinematic editorial portrait beside a window. Keep the same person's identity, facial structure, perceived adult age, gender presentation, skin tone, hairstyle, and natural body proportions. Use elegant contemporary styling and soft directional sunlight passing through blinds, creating subtle patterned shadows across the wall and subject. Expression poised and composed. Create a refined cinematic atmosphere like a premium fashion editorial, with rich but natural color grading, realistic skin texture, and shallow depth of field. Do not modify face or hairstyle. --ar 1:1"}],"notebook":[{"title":"01. 벤토 그리드 스타일(모던 웹UI)","prompt":"Bento grid UI layout, tech minimalist design, clean web interface, soft lighting, modern corporate aesthetic, vector flat style, UI/UX --ar 16:9"},{"title":"02. 비즈니스 미니멀 스타일","prompt":"Minimalist timeline infographic, simple flat vector art, clean data visualization, geometric shapes, corporate color palette, white background, highly legible --ar 16:9"},{"title":"03. 칠판 스타일 (교육용 슬라이드)","prompt":"Chalkboard sketch, educational diagram, white chalk on dark green board, hand-drawn aesthetic, arrows and mind maps, friendly and approachable tone"},{"title":"04. 일본 종이 만화책 스타일","prompt":"Manga instructional comic panel, clean line art, monochrome with screentones, informative speech bubbles, office worker character, tutorial style, expressive"},{"title":"05. 뉴 모피즘 스타일 (모던 웹사이트)","prompt":"Neumorphic tech schematic, soft UI, drop shadows, subtle gradients, clean tech blueprint, modern app interface, minimalist 3D layout"},{"title":"06. 바우하우스(현대 건축, 현대 미술) 스타일","prompt":"Bauhaus aesthetic, geometric abstraction, primary colors (red, blue, yellow), strict grid, modern minimalist poster, clean typography layout"},{"title":"07. 네온/사이버 펑크 스타일","prompt":"Neon noir technological scene, cyberpunk aesthetic, dark background with glowing neon accents, glowing data streams, highly detailed, futuristic"},{"title":"08. 도스 스타일(터미널, 녹색 텍스트)","prompt":"Retro CRT monitor screen, Matrix green text on black background, glowing phosphor, terminal code, vintage hacker aesthetic, scanlines"},{"title":"09. 복셀(3차원 픽셀) 아트 스타일","prompt":"Isometric voxel art, gamified office environment, highly detailed blocks, bright lighting, colorful pixel 3D, cute architectural diagram --ar 16:9"},{"title":"10. 클레이 애니메이션 스타일","prompt":"Claymation style, tactile 3D illustration, cute office worker figurine, soft smooth lighting, playful stop-motion aesthetic, vibrant pastel colors"},{"title":"11. 식물학/과학 일러스트 스타일","prompt":"Botanical scientific illustration, vintage field guide style, delicate line work, watercolor shading, highly detailed and precise"},{"title":"12. 카와이 스타일 / 파스텔 톤","prompt":"Kawaii illustration, girly pastel colors, soft and fluffy aesthetic, cute minimalist characters, warm lighting, dreamlike"},{"title":"13. 레트로 팝 스타일","prompt":"Retro pop art, playful aesthetic, 1980s Memphis design, bold outlines, vibrant flat colors, dynamic composition, energetic"},{"title":"14. 빈티지/액션 코믹스 스타일","prompt":"Vintage action comic panel, 1960s comic book style, halftone dot textures, dramatic angles, bold typography, retro coloring"},{"title":"15. 레트로 코믹 액션 블루프린트","prompt":"Retro-comic action blueprint, technical schematic drawing mixed with vintage comic art, blue and white colors, dynamic mechanical details"},{"title":"16. 역동적(하이 옥탄) 스타일 애니메이션","prompt":"High-octane anime style, intense dynamic action, speed lines, high energy, dramatic lighting, vivid colors, epic perspective"},{"title":"17. 로코코(프랑스, 낭만적) 스타일","prompt":"Elegant Rococo style, romantic ornate aesthetic, soft pastel oil painting, intricate gold floral details, vintage luxury"},{"title":"18. 플랫 코퍼레이트 일러스트","prompt":"Corporate flat illustration, Alegria style, modern tech startup blog art, simplified vector characters working in office, minimal background, bright professional colors --ar 16:9"},{"title":"19. 글래스 모피즘 3D (투명) 스타일","prompt":"3D glassmorphism icons, frosted glass UI elements, modern tech aesthetic, soft studio lighting, clean white background, high-end corporate presentation style"},{"title":"20. 페이퍼 컷아웃 아트 스타일","prompt":"Layered paper cutout art, conceptual office desk, soft shadows, pastel colored paper, clean and minimal storytelling, tactile texture --ar 16:9"},{"title":"21. 플랫 벡터 모션그래픽 스타일","prompt":"Flat vector illustration, science channel aesthetic, vibrant deep space colors, clean minimalist background, educational infographic, highly detailed yet simplified --ar 16:9"},{"title":"22. 시네마틱 우주 SF 다큐멘터리 스타일","prompt":"Cinematic 3D render of a space station orbiting a gas giant, hard sci-fi aesthetic, hyper-realistic, dramatic lighting, volumetric scattering, 8k resolution, space documentary style --ar 16:9"},{"title":"23. 뉴스레터 에디토리얼","prompt":"Magazine editorial layout, modern business newsletter, elegant serif typography, two-column grid, muted earth tone palette, professional photography style --ar 16:9"},{"title":"24. 스케치노트 스타일","prompt":"Sketchnote visual summary, hand-drawn icons and typography, black ink with color highlights, clean white background, educational mind map, conference note style --ar 16:9"},{"title":"25. 그라디언트 모던 커버","prompt":"Abstract gradient background, modern corporate cover design, smooth color transitions, geometric light effects, premium minimalist aesthetic, clean title space --ar 16:9"},{"title":"26. 도트 픽셀 아트 2D","prompt":"16-bit retro pixel art, 2D side-scrolling game scene, office worker character, bright saturated colors, nostalgic game UI elements, clean pixel grid --ar 16:9"},{"title":"27. SaaS 대시보드 인포그래픽","prompt":"SaaS dashboard infographic, clean enterprise UI, cards and charts, modern workplace software aesthetic, white and blue corporate palette, minimal interface, high clarity, presentation-ready, vector UI illustration --ar 16:9"},{"title":"28. Before / After 비교 카드형","prompt":"Before and after comparison card layout, split screen infographic, clean corporate design, organized workflow transformation, minimal icons, white background, highly legible, business presentation style --ar 16:9"},{"title":"29. 화이트보드 전략 회의형 스타일","prompt":"Whiteboard strategy meeting illustration, office team planning around a board, sticky notes and diagrams, modern business environment, clean semi-flat illustration, collaborative and intelligent tone --ar 16:9"},{"title":"30. 카드 뉴스형 정보 요약","prompt":"Card news style explainer, modular information blocks, bold headings, clean Korean social media editorial aesthetic, minimal icons, bright background, business-friendly visual summary --ar 16:9"},{"title":"31. 서류 / 리서치 데스크 스타일","prompt":"Research desk visualization, laptop with multiple documents and notes, clean analytical workspace, modern office desk, papers, charts and highlights, soft daylight, realistic editorial illustration --ar 16:9"},{"title":"32. 데이터 스토리텔링/광고 포스터","prompt":"Data storytelling poster, one key metric highlighted, clean chart-driven composition, modern corporate poster design, bold typography, minimal geometric elements, presentation-friendly --ar 16:9"},{"title":"33. 프리미엄 컨설팅 슬라이드 스타일","prompt":"Consulting deck visual, premium business slide aesthetic, clean layouts, subtle corporate color palette, sharp icons, minimal data elements, strategy presentation style, polished and executive-friendly --ar 16:9"},{"title":"34. 협업툴 메시지형 비주얼","prompt":"Collaboration app scene, modern team messaging and document sharing interface, office productivity software aesthetic, clean floating windows, minimal UI, bright professional environment --ar 16:9"},{"title":"35. 포스트잇 문제 해결 맵","prompt":"Sticky note problem solving map, colorful structured note clusters, clean workshop board, office ideation process, modern facilitation aesthetic, highly legible, visual thinking style --ar 16:9"},{"title":"36. 미니멀 라인 아트 다이어그램","prompt":"Minimalist line art diagram, simple continuous black lines on off-white background, step-by-step process, clean UI/UX elements, highly legible, professional and elegant"},{"title":"37. 프리미엄 스톡 사진","prompt":"Candid photography of a diverse corporate team reviewing a document together in a bright modern boardroom, authentic expression, shot on 35mm lens, shallow depth of field, soft natural lighting --ar 16:9"},{"title":"38. 핸드드로잉 노트북 필기","prompt":"Hand-drawn notebook journal page, lined paper texture, ballpoint pen sketches and handwritten notes, casual margin doodles, highlighted key points, warm personal study aesthetic, authentic and relatable --ar 16:9"},{"title":"39. 아이소메트릭 플랫 인포그래픽","prompt":"Isometric flat vector infographic, clean technical illustration, modern office workflow, soft gradient colors, organized layered structure, white background, professional and highly legible --ar 16:9"},{"title":"40. 듀오톤 그래픽 스타일","prompt":"Duotone graphic design, two-tone color overlay on photography, bold modern contrast, Spotify cover art aesthetic, striking visual impact, clean composition, contemporary editorial style --ar 16:9"},{"title":"41. 스텝 바이 스텝 매뉴얼","prompt":"Step-by-step instruction manual, IKEA assembly guide aesthetic, numbered sequential diagrams, simple line icons with color highlights, clean white background, universal pictogram style, highly functional and legible --ar 16:9"},{"title":"42. 3D 아이소메트릭 비즈니스 스타일","prompt":"3D isometric illustration, modern corporate workflow, clean office environment, soft clay render style, pastel and white color palette, highly detailed, soft studio lighting, tech business concept --ar 16:9"},{"title":"43. 모던 다크 모드 디자인","prompt":"Sleek dark mode UI presentation background, subtle glowing gradients, deep black and dark gray palette, modern minimalist tech aesthetic, elegant and premium corporate style, clean negative space --ar 16:9"},{"title":"44. 디지털 마인드맵 / 노드 스타일","prompt":"Abstract digital node network, glowing connecting lines and dots, clean data visualization concept, mind map aesthetic, modern deep tech background, soft glowing lights --ar 16:9"},{"title":"45. 볼드 타이포그래피","prompt":"Bold typography poster design, Swiss style layout, massive clean sans-serif text layout, high contrast minimal colors, modern graphic design aesthetic, strong visual impact --ar 16:9"},{"title":"46. 폴라로이드 무드보드","prompt":"Polaroid scrapbook layout on a wooden desk, aesthetic moodboard, sticky notes, scattered paper clips, candid team moments, warm soft lighting, nostalgic yet professional editorial style --ar 16:9"},{"title":"47. 디지털 태블릿 다이어리","prompt":"Digital planner interface, iPad GoodNotes aesthetic, pastel highlighters, digital handwriting, habit tracker layout, cozy personal productivity workspace, clean minimal design --ar 16:9"},{"title":"48. 스위스 그리드 인포디자인","prompt":"Swiss grid editorial design, ultra-clean modular layout, structured typography, asymmetric grid, modernist corporate poster, restrained color palette, highly legible, presentation-ready --ar 16:9"},{"title":"49. 포털형 카드 매거진","prompt":"Portal-style card magazine layout, clean Korean editorial web design, modular content cards, bold headlines, soft neutral palette, user-friendly information hierarchy, modern media aesthetic --ar 16:9"}]};
+  var TIPS={
+    nano:'<h4>쓰는 법</h4>기준으로 삼을 인물 사진을 먼저 올린 뒤 프롬프트를 붙여넣으세요. ChatGPT 이미지 만들기·나노바나나(Gemini)에서 씁니다.',
+    notebook:'<h4>쓰는 법</h4>모듈 ②에서 슬라이드 <b>지침</b>의 디자인 스타일 부분에 붙여넣으세요. 마음에 드는 스타일을 골라 그대로 쓰면 됩니다.'
+  };
+  var libGrid=document.getElementById('lib-grid');
+  var libEmpty=document.getElementById('lib-empty');
+  var libInput=document.getElementById('lib-input');
+  var libClear=document.getElementById('lib-clear');
+  var libTip=document.getElementById('lib-tip');
+  var libCount=document.getElementById('lib-count');
+  var libActive='nano', libQuery='';
+  var nc=document.getElementById('nano-count'), nbc=document.getElementById('notebook-count');
+  if(nc) nc.textContent=DATA.nano.length;
+  if(nbc) nbc.textContent=DATA.notebook.length;
+  function esc(v){return String(v).replace(/[&<>"']/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function libRender(){
+    if(!libGrid) return;
+    var src=DATA[libActive], kw=libQuery.trim().toLowerCase();
+    var list=src.filter(function(it){
+      return !kw || (it.title+' '+it.prompt+' '+(it.use||'')).toLowerCase().indexOf(kw)>=0;
+    });
+    libTip.innerHTML=TIPS[libActive];
+    libCount.textContent=list.length+'개 표시';
+    libEmpty.hidden=list.length!==0;
+    libGrid.innerHTML=list.map(function(it){
+      return '<article class="lib-card"><div class="lib-card-top"><div><h3>'+esc(it.title)+'</h3>'+
+        (it.use?'<p>'+esc(it.use)+'</p>':'')+
+        '</div><button type="button" class="copy lib-copy" aria-label="'+esc(it.title)+' 프롬프트 복사">복사</button></div>'+
+        '<div class="lib-prompt"><pre>'+esc(it.prompt)+'</pre></div></article>';
+    }).join('');
+  }
+  function libCopy(text,btn){
+    var done=function(){btn.textContent='복사됨 ✓';btn.classList.add('done');
+      setTimeout(function(){btn.textContent='복사';btn.classList.remove('done');},1500);};
+    function fallback(){
+      var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';
+      ta.style.opacity='0';document.body.appendChild(ta);ta.focus();ta.select();
+      try{document.execCommand('copy');done();}catch(e){}document.body.removeChild(ta);
+    }
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done).catch(fallback);
+    }else{fallback();}
+  }
+  if(libGrid){
+    libGrid.addEventListener('click',function(e){
+      var btn=e.target.closest('.lib-copy');if(!btn)return;
+      var card=btn.closest('.lib-card'), pre=card&&card.querySelector('pre');
+      if(pre) libCopy(pre.innerText,btn);
+    });
+    document.querySelectorAll('.lib-tab').forEach(function(tab){
+      tab.addEventListener('click',function(){
+        libActive=tab.dataset.tab;libQuery='';libInput.value='';libClear.hidden=true;
+        document.querySelectorAll('.lib-tab').forEach(function(t){
+          var sel=t===tab;t.classList.toggle('active',sel);t.setAttribute('aria-selected',String(sel));
+        });
+        libRender();
+      });
+    });
+    libInput.addEventListener('input',function(e){
+      libQuery=e.target.value;libClear.hidden=!libQuery;libRender();
+    });
+    libClear.addEventListener('click',function(){
+      libQuery='';libInput.value='';libClear.hidden=true;libInput.focus();libRender();
+    });
+    libRender();
+  }
 })();
 </script>
 </body>
